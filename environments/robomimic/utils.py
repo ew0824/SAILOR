@@ -70,7 +70,55 @@ def get_robomimic_dataset_path_and_env_meta(
 
     root_dir = datadir
     dataset_path = Path(root_dir, dataset_path)
-    env_meta = FileUtils.get_env_metadata_from_dataset(dataset_path=dataset_path)
+    
+    # Try to get env_meta from dataset, but handle case where env_args doesn't exist
+    try:
+        env_meta = FileUtils.get_env_metadata_from_dataset(dataset_path=dataset_path)
+    except KeyError as e:
+        if "env_args" in str(e):
+            # If env_args doesn't exist, create a default env_meta for robomimic
+            print(f"Warning: env_args not found in dataset {dataset_path}, using default env_meta")
+            env_meta = {
+                "env_name": f"PickPlace{env_id.capitalize()}",
+                "env_type": "robomimic",
+                "env_kwargs": {
+                    "has_renderer": False,
+                    "has_offscreen_renderer": False,
+                    "ignore_done": True,
+                    "use_object_obs": True,
+                    "use_camera_obs": False,
+                    "reward_shaping": False,
+                    "control_freq": 20,
+                    "controller_configs": {
+                        "type": "OSC_POSE",
+                        "input_max": 1,
+                        "input_min": -1,
+                        "output_max": [0.05, 0.05, 0.05, 0.5, 0.5, 0.5],
+                        "output_min": [-0.05, -0.05, -0.05, -0.5, -0.5, -0.5],
+                        "kp": 150,
+                        "damping": 1,
+                        "impedance_mode": "fixed",
+                        "kp_limits": [0, 300],
+                        "damping_limits": [0, 10],
+                        "position_limits": None,
+                        "orientation_limits": None,
+                        "uncouple_pos_ori": True,
+                        "control_delta": True,
+                        "interpolation": None,
+                        "ramp_ratio": 0.2
+                    },
+                    "robots": ["Panda"],
+                    "camera_names": "agentview",
+                    "camera_depths": False,
+                    "camera_heights": 84,
+                    "camera_widths": 84
+                },
+                "env_version": "1.4.1"
+            }
+        else:
+            # Re-raise if it's a different KeyError
+            raise
+    
     return dataset_path, env_meta
 
 
