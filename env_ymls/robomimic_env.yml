@@ -19,7 +19,7 @@ dependencies:
       - torch==2.3.1
       - torchvision==0.18.1
       - torchaudio==2.3.1
-      - --extra-index-url https://download.pytorch.org/whl/cu118
+      - --extra-index-url https://download.pytorch.org/whl/cu121
       - egl-probe==1.0.2
       - einops==0.8.0
       - gdown==5.2.0

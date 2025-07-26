@@ -26,5 +26,5 @@ dependencies:
       - torch==2.3.1
       - torchvision==0.18.1
       - torchaudio==2.3.1
-      - --extra-index-url https://download.pytorch.org/whl/cu118
+      - --extra-index-url https://download.pytorch.org/whl/cu121
       - git+https://github.com/facebookresearch/r3m.git@b2334e726887fa0206962d7984c69c5fb09cceab
