@@ -13,7 +13,7 @@ defaults:
 
   # Wandb configs
   use_wandb: True
-  wandb_entity: 'scaling-rl' # Top level name
+  wandb_entity: 'mredmondwang' # Top level name
   wandb_project: null
   wandb_exp_name: null
 
@@ -182,6 +182,7 @@ robomimic:
 
 robocasa:
   done_mode: 1 # can be 0, 1, 2
+  image_size: 256
   action_repeat: 3
   
   dp:
