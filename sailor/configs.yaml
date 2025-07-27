@@ -13,7 +13,7 @@ defaults:
 
   # Wandb configs
   use_wandb: True
-  wandb_entity: 'scaling-rl' # Top level name
+  wandb_entity: 'mredmondwang' # Top level name
   wandb_project: null
   wandb_exp_name: null
 
