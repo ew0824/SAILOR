@@ -484,10 +484,10 @@ class SAILORTrainer:
                 )
 
                 # Save Checkpoint
-                save_dir = self.config.logdir / "latest_residual_checkpoint.pt"
+                save_dir = self.config.logdir / f"residual_checkpoint_round_{round_id}.pt"
                 self.dreamer_class.save_checkpoint(path=save_dir)
 
-                ckpt_file = self.config.logdir / f"latest_base_policy.pt"
+                ckpt_file = self.config.logdir / f"base_policy_round_{round_id}.pt"
                 self.base_policy.trainer.save_checkpoint(
                     ckpt_file, global_step=self._step
                 )
@@ -520,10 +520,10 @@ class SAILORTrainer:
                 self.eval_mppi_policy(prefix=f"round_{round_id}", round_id=round_id)
 
                 # Save Checkpoint
-                save_dir = self.config.logdir / "latest_residual_checkpoint.pt"
+                save_dir = self.config.logdir / f"residual_checkpoint_round_{round_id}.pt"
                 self.dreamer_class.save_checkpoint(path=save_dir)
 
-                ckpt_file = self.config.logdir / f"latest_base_policy.pt"
+                ckpt_file = self.config.logdir / f"base_policy_round_{round_id}.pt"
                 self.base_policy.trainer.save_checkpoint(
                     ckpt_file, global_step=self._step
                 )
