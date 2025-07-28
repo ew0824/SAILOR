@@ -50,22 +50,22 @@ defaults:
   
   # Model
   reward_EMA: True
-  dyn_hidden: 512
-  dyn_deter: 512
+  dyn_hidden: 1024
+  dyn_deter: 1024
   dyn_stoch: 32
-  dyn_discrete: 32 # set as 0 for continuous latent
+  dyn_discrete: 64 # set as 0 for continuous latent
   dyn_rec_depth: 1
   dyn_mean_act: 'none'
   dyn_std_act: 'sigmoid2'
   dyn_min_std: 0.1
   grad_heads: ['decoder', 'cont']
-  units: 512
+  units: 1024
   act: 'SiLU'
   norm: True'
   encoder:
-    {mlp_keys: '.*state.*', cnn_keys: '.*image.*', act: 'SiLU', norm: True, cnn_depth: 32, kernel_size: 4, minres: 4, mlp_layers: 5, mlp_units: 1024, symlog_inputs: True}
+    {mlp_keys: '.*state.*', cnn_keys: '.*image.*', act: 'SiLU', norm: True, cnn_depth: 64, kernel_size: 4, minres: 4, mlp_layers: 5, mlp_units: 1024, symlog_inputs: True}
   decoder:
-    {mlp_keys: '.*state.*', cnn_keys: '.*image.*', act: 'SiLU', norm: True, cnn_depth: 32, kernel_size: 4, minres: 4, mlp_layers: 5, mlp_units: 1024, cnn_sigmoid: False, image_dist: mse, vector_dist: symlog_mse, outscale: 1.0}
+    {mlp_keys: '.*state.*', cnn_keys: '.*image.*', act: 'SiLU', norm: True, cnn_depth: 64, kernel_size: 4, minres: 4, mlp_layers: 5, mlp_units: 1024, cnn_sigmoid: False, image_dist: mse, vector_dist: symlog_mse, outscale: 1.0}
   residual_actor:
     {layers: 2, dist: 'normal', entropy: 3e-4, unimix_ratio: 0.01, std: 'learned', min_std: 0.01, max_std: 0.1, temp: 0.1, lr: 3e-5, eps: 1e-5, grad_clip: 100.0, outscale: 1.0, absmax: null}
   critic:
@@ -111,7 +111,7 @@ defaults:
     train_transform: 'gpu_medium'
     debug: False
     print_config: False
-    pretrained_ckpt: ""
+    pretrained_ckpt: "DP_Pretrain_base_policy_latest.pt"
     shared_mlp: []
     use_if_ckpt_present: False
   
